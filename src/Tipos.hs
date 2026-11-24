@@ -1,6 +1,6 @@
 module Tipos 
 (Time
-, Resultados (..)
+, Resultado (..)
 , Partida (..)
 , Linha (..)
 , participou
@@ -22,7 +22,7 @@ data Partida = Partida
   , golsVisitante :: Int 
   , visitante     :: Time
     
-  }
+  }deriving (Show, Eq)
   
 data Linha = Linha 
  { time           :: Time
@@ -32,7 +32,21 @@ data Linha = Linha
  , derrotas       :: Int 
  , golsPro        :: Int
  ,golsContra      :: Int
- }
+ }deriving (Show, Eq)
  
 participou :: Time -> Partida -> Bool
 participou t p = t == mandante p || t == visitante p
+
+resultadoPara :: Time -> Partida -> Maybe Resultado
+resultadoPara t p
+  | t == mandante p  = Just (comparar (golsMandante p) (golsVisitante p))
+  | t == visitante p = Just (comparar (golsVisitante p) (golsMandante p))
+  | otherwise        = Nothing
+  where
+    comparar meus deles
+      | meus > deles = Vitoria
+      | meus < deles = Derrota
+      | otherwise    = Empate
+
+times :: [Partida] -> [Time]
+times = sort . nub . concatMap (\p -> [mandante p, visitante p])
