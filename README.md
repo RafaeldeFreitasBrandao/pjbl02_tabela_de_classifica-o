@@ -9,7 +9,7 @@ Projeto desenvolvido por:
 
 O objetivo é calcular a classificação de um campeonato de futebol a partir dos resultados das partidas
 
---
+---
 
 ## **O que o programa faz**
 
@@ -20,7 +20,7 @@ O objetivo é calcular a classificação de um campeonato de futebol a partir do
 
 A classificação considera pontos, vitórias, saldo de gols, gols marcados e nome do time, nessa ordem
 
---
+---
 
 ## **Organização dos arquivos**
 
