@@ -18,6 +18,12 @@ linhaInicial t = Linha t 0 0 0 0 0 0
 linhaDoTime :: [Partida] -> Time -> Linha
 linhaDoTime ps t = foldl (somarPartida t) (linhaInicial t) (filter (participou t) ps)
 
+golsPara :: Time -> Partida -> Maybe (Int, Int)
+golsPara nome partida
+  | nome == mandante partida = Just (golsMandante partida, golsVisitante partida)
+  | nome == visitante partida = Just (golsVisitante partida, golsMandante partida)
+  | otherwise = Nothing
+
 somarPartida :: Time -> Linha -> Partida -> Linha
 somarPartida t l p = case (resultadoPara t p, golsPara t p) of
   (Just r, Just (feitos, sofridos)) -> l
