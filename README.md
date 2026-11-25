@@ -1,15 +1,22 @@
-### **Tabela de Classificação em Haskell**
+### ** PJBL02 - Tabela de Classificação em Haskell**
 
-Projeto desenvolvido por: 
+Projeto desenvolvido pelos estudantes:
 
-- Carlos Sacerdote
 - Arthur Domingues 
+- Carlos Sacerdote
+- Gustavo Fagundes
 - Rafael Brandão 
-- Gustavo Fagundes.
 
-O objetivo é calcular a classificação de um campeonato de futebol a partir dos resultados das partidas
+### ** Objetivo **
+O objetivo do desenvolvimento do projeto é consolidar os fundamentos da programação funcional através de um problema concreto: Calcular a classificação de um campeonato de futebol a partir dos resultados das partidas.
 
 ---
+
+### ** Linguagem e Ambiente de Execução **
+
+O projeto foi desenvolvido e testado usando a linguagem Haskell, com o GHC 9.10.3 instalado localmente pelo GHCup, no Windows. O playground só foi usado para prática e mini-testes.
+
+O código utiliza a bilbioteca base, como descrito no projeto, então não é necessário instalar nenhum pacote extra.
 
 ### **O que o programa faz**
 
@@ -50,12 +57,14 @@ O programa utiliza os dados de src/Dados.hs. Não é necessário digitar os resu
 
 Na pasta principal do repositório, execute:
 
+```
 ghc -Wall -isrc src/Main.hs -o campeonato
+```
 
 Depois, no Windows PowerShell, execute:
-
+```
 .\campeonato.exe
-
+```
 ---
 
 ### **Como executar os testes**
@@ -63,8 +72,9 @@ Depois, no Windows PowerShell, execute:
 O arquivo tests/Testes.hs reúne 50 testes das três camadas, incluindo classificação, desempates e validação dos dados.
 
 Na pasta principal do repositório, execute:
-
+```
 runghc -isrc tests/Testes.hs
+```
 
 Os testes mostram OK quando o resultado está correto e FALHOU quando é diferente do esperado
 
