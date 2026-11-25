@@ -116,6 +116,7 @@ main = do
   testar "time vazio" (lerCampeonato "1;;2;0;Athletico") (Left (CamposInvalidos 1))
   testar "numero invalido nos gols" (lerCampeonato "1;Coritiba;dois;0;Athletico") (Left (NumeroInvalido 1))
   testar "numero invalido na rodada" (lerCampeonato "dois;Coritiba;2;0;Athletico") (Left (NumeroInvalido 1))
+  testar "rodada zero" (lerCampeonato "0;Coritiba;2;0;Athletico") (Left (NumeroInvalido 1))
   testar "placar negativo" (lerCampeonato "1;Coritiba;0;-1;Athletico") (Left (PlacarNegativo 1))
   testar "mesmo time" (lerCampeonato "1;Coritiba;1;0;Coritiba") (Left (MesmoTime 1))
   testar "time repetido na rodada"
@@ -135,7 +136,9 @@ main = do
   testar "entrada valida sem erros" (todosOsErros dadosCampeonato) []
   testar "campeonato vazio" (lerCampeonato "") (Right [])
   testar "tabela formatada" (tabelaFormatada [Linha "Coritiba" 2 1 1 0 3 1])
-    "Pos | Time | Pts | J | V | E | D | SG\n1 | Coritiba | 4 | 2 | 1 | 1 | 0 | 2\n"
-  testar "tabela vazia" (tabelaFormatada []) "Pos | Time | Pts | J | V | E | D | SG\n"
+    (unlines [ "Pos | Time     | Pts |   J |   V |   E |   D |  SG"
+             , "  1 | Coritiba |   4 |   2 |   1 |   1 |   0 |   2" ])
+  testar "tabela vazia" (tabelaFormatada [])
+    "Pos | Time | Pts |   J |   V |   E |   D |  SG\n"
 
   putStrLn "\nTodos os testes passaram."

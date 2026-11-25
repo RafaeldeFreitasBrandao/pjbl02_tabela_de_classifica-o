@@ -16,6 +16,9 @@ dadosInvalidos = unlines
   , "5;Coritiba;2;0;Paraná"
   ]
 
+umaCasa :: Double -> String
+umaCasa x = show (fromIntegral (round (x * 10) :: Integer) / 10 :: Double)
+
 main :: IO ()
 main = do
   hSetEncoding stdout utf8
@@ -44,7 +47,7 @@ main = do
 
       putStrLn "\nAproveitamento dos times"
       mapM_ (\linha -> putStrLn
-        (time linha ++ ": " ++ show (aproveitamento linha) ++ "%")) tabela
+        (time linha ++ ": " ++ umaCasa (aproveitamento linha) ++ "%")) tabela
 
   putStrLn "\nPrimeiro erro da entrada inválida"
   case lerCampeonato dadosInvalidos of

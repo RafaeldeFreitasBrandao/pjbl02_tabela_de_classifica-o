@@ -1,6 +1,7 @@
 module Leitura where
 
 import Tipos
+import Classificacao (pontosLinha, saldo)
 import Data.Char (isSpace)
 import Data.List (intercalate)
 import Text.Read (readMaybe)
@@ -33,16 +34,16 @@ lerPartida numero texto =
       rodadaLida <- lerNumero numero rodadaTexto
       golsCasa <- lerNumero numero golsCasaTexto
       golsFora <- lerNumero numero golsForaTexto
-
-      if null casa || null fora
-        then Left (CamposInvalidos numero)
-        else if golsCasa < 0 || golsFora < 0
-          then Left (PlacarNegativo numero)
-          else if casa == fora
-            then Left (MesmoTime numero)
-            else Right (Partida rodadaLida casa golsCasa golsFora fora)
+      exigir (not (null casa || null fora)) (CamposInvalidos numero)
+      exigir (rodadaLida > 0) (NumeroInvalido numero)
+      exigir (golsCasa >= 0 && golsFora >= 0) (PlacarNegativo numero)
+      exigir (casa /= fora) (MesmoTime numero)
+      Right (Partida rodadaLida casa golsCasa golsFora fora)
 
     _ -> Left (CamposInvalidos numero)
+
+exigir :: Bool -> Erro -> Either Erro ()
+exigir condicao erro = if condicao then Right () else Left erro
 
 ignorarLinha :: String -> Bool
 ignorarLinha texto =
@@ -92,7 +93,7 @@ mensagemErro (CamposInvalidos numero) =
   "Linha " ++ show numero ++ ": informe os cinco campos e os nomes dos times."
 
 mensagemErro (NumeroInvalido numero) =
-  "Linha " ++ show numero ++ ": rodada e gols devem ser numeros inteiros."
+  "Linha " ++ show numero ++ ": a rodada deve ser um inteiro positivo e os gols, numeros inteiros."
 
 mensagemErro (PlacarNegativo numero) =
   "Linha " ++ show numero ++ ": os gols nao podem ser negativos."
@@ -105,19 +106,22 @@ mensagemErro (TimeRepetidoNaRodada numero nome) =
 
 tabelaFormatada :: [Linha] -> String
 tabelaFormatada tabela =
-  unlines
-    ("Pos | Time | Pts | J | V | E | D | SG"
-      : zipWith formatarLinha [1..] tabela)
+  unlines (cabecalho : zipWith (formatarLinha largura) [1 ..] tabela)
+  where
+    largura = foldr (max . length . time) (length "Time") tabela
+    cabecalho = montarLinha largura "Pos" "Time" ["Pts", "J", "V", "E", "D", "SG"]
 
-formatarLinha :: Int -> Linha -> String
-formatarLinha posicao linha =
+formatarLinha :: Int -> Int -> Linha -> String
+formatarLinha largura posicao linha =
+  montarLinha largura (show posicao) (time linha)
+    (map show
+      [pontosLinha linha, jogos linha, vitorias linha, empates linha, derrotas linha, saldo linha])
+
+montarLinha :: Int -> String -> String -> [String] -> String
+montarLinha largura posicao nome numeros =
   intercalate " | "
-    [ show posicao
-    , time linha
-    , show (vitorias linha * 3 + empates linha)
-    , show (jogos linha)
-    , show (vitorias linha)
-    , show (empates linha)
-    , show (derrotas linha)
-    , show (golsPro linha - golsContra linha)
-    ]
+    (alinharDireita 3 posicao : alinharEsquerda largura nome : map (alinharDireita 3) numeros)
+
+alinharDireita, alinharEsquerda :: Int -> String -> String
+alinharDireita n texto = replicate (n - length texto) ' ' ++ texto
+alinharEsquerda n texto = texto ++ replicate (n - length texto) ' '

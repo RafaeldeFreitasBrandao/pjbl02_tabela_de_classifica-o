@@ -60,7 +60,7 @@ Depois, no Windows PowerShell, execute:
 
 ### **Como executar os testes**
 
-O arquivo tests/Testes.hs reúne 49 testes das três camadas, incluindo classificação, desempates e validação dos dados.
+O arquivo tests/Testes.hs reúne 50 testes das três camadas, incluindo classificação, desempates e validação dos dados.
 
 Na pasta principal do repositório, execute:
 
