@@ -1,4 +1,4 @@
-## **Tabela de Classificação em Haskell**
+### **Tabela de Classificação em Haskell**
 
 Projeto desenvolvido por: 
 
@@ -11,7 +11,7 @@ O objetivo é calcular a classificação de um campeonato de futebol a partir do
 
 ---
 
-## **O que o programa faz**
+### **O que o programa faz**
 
 - Mostra a classificação final e após a 3ª rodada.
 - Calcula pontos, saldo de gols e aproveitamento dos times.
@@ -22,7 +22,7 @@ A classificação considera pontos, vitórias, saldo de gols, gols marcados e no
 
 ---
 
-## **Organização dos arquivos**
+### **Organização dos arquivos**
 
 - Tipos.hs: tipos dos dados e consultas básicas.
 - Dados.hs: dados do campeonato.
@@ -34,7 +34,7 @@ A classificação considera pontos, vitórias, saldo de gols, gols marcados e no
 
 ---
 
-## **Como executar o Main.hs**
+### **Como executar o Main.hs**
 
 É necessário ter o GHC instalado, com o comando runghc disponível.
 
@@ -46,7 +46,7 @@ O programa utiliza os dados de src/Dados.hs. Não é necessário digitar os resu
 
 ---
 
-## **Como compilar**
+### **Como compilar**
 
 Na pasta principal do repositório, execute:
 
@@ -58,7 +58,7 @@ Depois, no Windows PowerShell, execute:
 
 ---
 
-## **Como executar os testes**
+### **Como executar os testes**
 
 Na pasta principal do repositório, execute:
 
@@ -68,7 +68,7 @@ Os testes mostram OK quando o resultado está correto e FALHOU quando é diferen
 
 ---
 
-## **Formato dos dados**
+### **Formato dos dados**
 
 Cada partida deve seguir esta ordem, com os campos separados por ponto e vírgula:
 
