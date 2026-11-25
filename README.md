@@ -29,8 +29,8 @@ A classificação considera pontos, vitórias, saldo de gols, gols marcados e no
 - Classificacao.hs: cálculos e classificação.
 - Leitura.hs: leitura, validação e formatação da tabela.
 - Main.hs: execução do programa.
-- tests/Testes.hs: testes da Camada 1.
-- docs/decisoes.md: espaço para registrar decisões e limitações.
+- tests/Testes.hs: testes das Camadas 1, 2 e 3.
+- docs/decisoes.md: decisões de implementação e limitações conhecidas.
 
 ---
 
@@ -59,6 +59,8 @@ Depois, no Windows PowerShell, execute:
 ---
 
 ### **Como executar os testes**
+
+O arquivo tests/Testes.hs reúne 49 testes das três camadas, incluindo classificação, desempates e validação dos dados.
 
 Na pasta principal do repositório, execute:
 
