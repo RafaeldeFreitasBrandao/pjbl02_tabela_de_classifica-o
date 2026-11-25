@@ -16,7 +16,7 @@ linhaInicial :: Time -> Linha
 linhaInicial t = Linha t 0 0 0 0 0 0
 
 linhaDoTime :: [Partida] -> Time -> Linha
-linhaDoTime ps t = foldl (somarPartida t) (linhaInicial t) (filter(participou) ps )
+linhaDoTime ps t = foldl (somarPartida t) (linhaInicial t) (filter (participou t) ps)
 
 somarPartida :: Time -> Linha -> Partida -> Linha
 somarPartida t l p = case (resultadoPara t p, golsPara t p) of
